@@ -84,6 +84,8 @@ describe SpreeShippoLabels do
         expect(cfg.automatic_register_shippo_user).to eq(true)
         expect(cfg.store_usps_enabled).to eq(true)
         expect(cfg.automatic_update_shipping).to eq(false)
+        expect(cfg.api_user_role).to eq('admin')
+
       end
       it "overrides the store config when specified" do
         SpreeShippoLabels::Config.setup({partner_key: 'shippo',
@@ -97,7 +99,8 @@ describe SpreeShippoLabels do
                                                    api_user_login: (aul = 'b@c.com'),
                                                    automatic_register_shippo_user: false,
                                                    store_usps_enabled: true,
-                                                   automatic_update_shipping: true
+                                                   automatic_update_shipping: true,
+                                                   api_user_role: 'test'
                                                  })
         cfg = SpreeShippoLabels::Config.instance
         expect(cfg).to be
@@ -110,6 +113,7 @@ describe SpreeShippoLabels do
         expect(cfg.automatic_register_shippo_user).to eq(false)
         expect(cfg.store_usps_enabled).to eq(true)
         expect(cfg.automatic_update_shipping).to eq(true)
+        expect(cfg.api_user_role).to eq('test')
       end
     end
   end
