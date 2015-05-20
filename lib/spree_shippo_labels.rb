@@ -17,7 +17,7 @@ module SpreeShippoLabels
       user.login                 = Config.instance.api_user_login
     end
     if api_user.new_record? && api_user.save!
-      api_user.spree_roles << Spree::Role.find_or_create_by(name: 'admin')
+      api_user.spree_roles << Spree::Role.find_or_create_by(name: Config.instance.api_user_role)
       api_user.generate_spree_api_key!
     end
     api_user
@@ -81,7 +81,7 @@ module SpreeShippoLabels
     attr_accessor :partner_key, :partner_secret,
                   :store_name, :api_user_email, :api_user_login, :store_url, :store_merchant_email,
                   :automatic_register_shippo_user, :store_usps_enabled, :automatic_update_shipping,
-                  :auth_url, :order_base_url
+                  :auth_url, :order_base_url, :api_user_role
 
     def initialize(partner_config)
       @partner_key    = partner_config[:partner_key]
@@ -96,7 +96,8 @@ module SpreeShippoLabels
         order_base_url:                 [BASE_URL, SPREE_ENDPOINT, ORDER_ENDPOINT].join('/'),
         automatic_register_shippo_user: true,
         store_usps_enabled:             true,
-        automatic_update_shipping:      false
+        automatic_update_shipping:      false,
+        api_user_role:                  'admin'
       }.merge(store_config)
       api_email                     = build_api_user_email(store_config[:store_name])
       store_config[:api_user_email] ||= api_email
