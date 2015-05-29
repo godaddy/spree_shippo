@@ -10,6 +10,7 @@ module SpreeShippoLabels
   SPREE_ENDPOINT          = "spreecommerce"
   AUTH_ENDPOINT           = "auth/"
   ORDER_ENDPOINT          = "orders"
+  DEFAULT_API_USER        = "apiuser.shippo@example.com"
 
   def self.get_shippo_user
     api_user = Spree::User.find_or_initialize_by(email: Config.instance.api_user_email) do |user|
@@ -109,7 +110,11 @@ module SpreeShippoLabels
     end
 
     def build_api_user_email(store_name)
-      return store_name.gsub(/[^0-9A-Za-z]/, '').downcase + SPREE_SHIPPO_USER_EMAIL
+      if store_name.nil?
+        return DEFAULT_API_USER
+      else
+        return store_name.gsub(/[^0-9A-Za-z]/, '').downcase + SPREE_SHIPPO_USER_EMAIL
+      end
     end
 
   end
