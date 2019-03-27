@@ -1,5 +1,4 @@
-require 'spec_helper'
-describe Spree::Admin::ShippoController do
+RSpec.describe Spree::Admin::ShippoController do
   stub_authorization!
 
   before do
@@ -10,26 +9,26 @@ describe Spree::Admin::ShippoController do
 
   describe "#show" do
     it "responds with a 200 status" do
-      get :show, use_route: :shippo_settings
-      expect(response.status).to be(200)
+      get :show, params: { use_route: :shippo_settings }, format: :json
+      expect(response.status).to be(204)
     end
     it "creates api user that shippo will use to connect back to the store to fetch the orders" do
       api_user_email = SpreeShippoLabels::Config.instance.api_user_email
       expect(Spree::User.find_by_email(api_user_email)).to be_nil
-      get :show, use_route: :shippo_settings
+      get :show, params: { use_route: :shippo_settings }, format: :json
       expect(Spree::User.find_by_email(api_user_email)).not_to be_nil
     end
   end
 
   describe "#view_order" do
-    subject {get :view_order, use_route: :shippo_settings, id: 123}
+    subject { get :view_order, params: { id: 123, use_route: :shippo_settings } }
     it "redirects to order url" do
       expect(subject).to redirect_to('https://goshippo.com/spreecommerce/orders/123')
     end
   end
 
   describe "#view_orders" do
-    subject {get :view_orders, use_route: :shippo_settings, id: 123}
+    subject { get :view_orders, params: { id: 123, use_route: :shippo_settings } }
     it "redirects to orders url" do
       expect(subject).to redirect_to('https://goshippo.com/spreecommerce/orders')
     end

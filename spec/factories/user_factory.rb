@@ -1,8 +1,8 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, class: Spree.user_class do
     email { generate(:random_email) }
     login { email }
-    password 'secret'
+    password { 'secret' }
     password_confirmation { password }
 
     factory :admin_user do

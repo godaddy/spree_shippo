@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe SpreeShippoLabels do
+RSpec.describe SpreeShippoLabels do
   class DummyClass
   end
 
