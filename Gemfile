@@ -1,17 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'spree', github: 'spree/spree', branch: '2-2-stable'
-# Provides basic authentication functionality for testing parts of your engine
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-2-stable'
+gem 'spree', git: 'https://github.com/godaddy/spree', branch: 'rails_50'
+gem 'spree_auth_devise', git: 'https://github.com/godaddy/spree_auth_devise', branch: 'rails_50'
 
 gemspec
 
 group :development, :test do
-  gem 'rails', '~> 4.0.5'
-  gem 'factory_girl_rails', '~> 4.0'
-  gem 'simplecov-rcov'
-  gem 'yarjuf'
-  gem 'require_all'
   gem 'byebug'
-  gem 'pry'
+  gem 'listen'
 end
