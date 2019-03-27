@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Spree::Admin::ShippoController < Spree::Admin::BaseController
   include SpreeShippoLabels
 

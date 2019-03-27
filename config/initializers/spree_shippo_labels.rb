@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##########################################################
 # partner_config - SHIPPO PARTNER ACCESS SETTINGS
 # The partner key is the human-readable Shippo partner name.
