@@ -1,7 +1,0 @@
-en:
-    Spree:
-        view_on_shippo: "View on Shippo"
-        shippo_settings: "Shippo Settings"
-        connection_page_heading: "Your Shippo connection"
-        connection_description: "Shippo allows you to purchase shipping labels for all your orders right on goshippo.com. We automatically import all your orders from your Spreecommerce store into the Shippo interface. Setting it up is easy."
-        open_shippo: "Connect with Shippo now"
