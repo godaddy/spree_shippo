@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user, class: Spree.user_class do
     email { generate(:random_email) }
