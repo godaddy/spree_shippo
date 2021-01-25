@@ -14,12 +14,20 @@
 #             tracking and shipment information when a shipping
 #             label is purchased
 ##########################################################
-SpreeShippoLabels::Config.setup({
-                                  partner_key:    nil,
-                                  partner_secret: nil
-                                })
-SpreeShippoLabels::Config.instance.add_store_config({
-                                                      automatic_register_shippo_user: false,
-                                                      store_usps_enabled:             false,
-                                                      automatic_update_shipping:      false
-                                                    })
+SpreeShippoLabels::Config.setup(
+  {
+    partner_key:    nil,
+    partner_secret: nil
+  }
+)
+begin
+  SpreeShippoLabels::Config.instance.add_store_config(
+    {
+      automatic_register_shippo_user: false,
+      store_usps_enabled:             false,
+      automatic_update_shipping:      false
+    }
+  )
+rescue ActiveRecord::NoDatabaseError
+  # avoids sensitivity of creating a tenant db before common
+end
